@@ -33,7 +33,10 @@ class App extends React.Component<{}, State> {
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
 
-    this.setState(prev => ({ ...prev, [name]: value }));
+    this.setState(prev => ({
+      ...prev,
+      [name]: Number(value),
+    }));
   };
 
   render() {
