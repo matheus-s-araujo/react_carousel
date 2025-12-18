@@ -56,14 +56,12 @@ class App extends React.Component<{}, State> {
 
         <div className="carousel-settings">
           <div className="carousel-settings__field">
-            <label
-              htmlFor="itemWidth"
-              className="carousel-settings__field-name"
-            >
+            <label htmlFor="itemId" className="carousel-settings__field-name">
               Tamanho da Imagem
             </label>
             <input
               className="carousel-settings__input"
+              id="itemId"
               name="itemWidth"
               type="number"
               value={itemWidth}
@@ -71,14 +69,12 @@ class App extends React.Component<{}, State> {
             ></input>
           </div>
           <div className="carousel-settings__field">
-            <label
-              htmlFor="frameSize"
-              className="carousel-settings__field-name"
-            >
+            <label htmlFor="frameId" className="carousel-settings__field-name">
               Tamanho do carrossel
             </label>
             <input
               className="carousel-settings__input"
+              id="frameId"
               name="frameSize"
               type="number"
               value={frameSize}
@@ -86,11 +82,12 @@ class App extends React.Component<{}, State> {
             ></input>
           </div>
           <div className="carousel-settings__field">
-            <label htmlFor="step" className="carousel-settings__field-name">
+            <label htmlFor="stepId" className="carousel-settings__field-name">
               Quantas imagens passar
             </label>
             <input
               className="carousel-settings__input"
+              id="stepId"
               name="step"
               type="number"
               value={step}
@@ -99,21 +96,20 @@ class App extends React.Component<{}, State> {
           </div>
           <div className="carousel-settings__field">
             <label
-              htmlFor="animationDuration"
+              htmlFor="animationDurationId"
               className="carousel-settings__field-name"
             >
               Duração da animação
             </label>
             <input
               className="carousel-settings__input"
+              id="animationDurationId"
               name="animationDuration"
               type="number"
               value={animationDuration}
               onChange={this.handleChange}
             ></input>
           </div>
-
-          <input type="submit" name="" id="" />
         </div>
       </div>
     );
