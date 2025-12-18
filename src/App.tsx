@@ -3,11 +3,12 @@ import './App.scss';
 import Carousel from './components/Carousel';
 
 interface State {
-  itemWidth: number;
-  frameSize: number;
-  step: number;
-  animationDuration: number;
   images: string[];
+  itemWidth?: number;
+  frameSize?: number;
+  step?: number;
+  animationDuration?: number;
+  infinite?: boolean;
 }
 
 class App extends React.Component<{}, State> {
@@ -28,6 +29,7 @@ class App extends React.Component<{}, State> {
     frameSize: 3,
     step: 3,
     animationDuration: 1000,
+    infinite: false,
   };
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +42,7 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { images, itemWidth, frameSize, step, animationDuration } =
+    const { images, itemWidth, frameSize, step, animationDuration, infinite } =
       this.state;
 
     return (
@@ -55,6 +57,7 @@ class App extends React.Component<{}, State> {
           frameSize={frameSize}
           step={step}
           animationDuration={animationDuration}
+          infinite={infinite}
         />
 
         <div className="carousel-settings">
@@ -112,6 +115,26 @@ class App extends React.Component<{}, State> {
               value={animationDuration}
               onChange={this.handleChange}
             ></input>
+          </div>
+          <div className="carousel-settings__field">
+            <label
+              htmlFor="infiniteId"
+              className="carousel-settings__field-name"
+            >
+              Carrossel infinito
+            </label>
+            <input
+              className="carousel-settings__input"
+              id="infiniteId"
+              name="infinite"
+              type="checkbox"
+              checked={!!infinite}
+              onChange={() =>
+                this.setState(prev => ({
+                  infinite: !prev.infinite,
+                }))
+              }
+            />
           </div>
         </div>
       </div>

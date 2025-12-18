@@ -4,18 +4,20 @@ import './Carousel.scss';
 
 interface CarouselProps {
   images: string[];
-  itemWidth: number;
-  frameSize: number;
-  step: number;
-  animationDuration: number;
+  itemWidth?: number;
+  frameSize?: number;
+  step?: number;
+  animationDuration?: number;
+  infinite?: boolean;
 }
 
 const Carousel: React.FC<CarouselProps> = ({
   images,
-  itemWidth,
-  frameSize,
-  step,
-  animationDuration,
+  itemWidth = 130,
+  frameSize = 3,
+  step = 1,
+  animationDuration = 300,
+  infinite = false,
 }) => {
   const [position, setPosition] = useState(0);
   const gap: number = 10;
@@ -34,13 +36,17 @@ const Carousel: React.FC<CarouselProps> = ({
     <div className="carousel">
       <button
         className={
-          position > 0
-            ? 'carousel-container__button-prev'
-            : 'carousel-container__button-prev disabled'
+          !infinite && position === 0
+            ? 'carousel-container__button-prev disabled'
+            : 'carousel-container__button-prev'
         }
         type="button"
         onClick={() => {
-          if (position > 0) {
+          if (infinite) {
+            const maxPosition = Math.ceil((images.length - frameSize) / step);
+
+            setPosition(prev => (prev > 0 ? prev - 1 : maxPosition));
+          } else if (position > 0) {
             setPosition(position - 1);
           }
         }}
@@ -75,7 +81,11 @@ const Carousel: React.FC<CarouselProps> = ({
         data-cy="next"
         type="button"
         onClick={() => {
-          if (currentTranslate > minTranslate) {
+          if (infinite) {
+            setPosition(prev =>
+              currentTranslate > minTranslate ? prev + 1 : 0,
+            );
+          } else if (currentTranslate > minTranslate) {
             setPosition(position + 1);
           }
         }}
